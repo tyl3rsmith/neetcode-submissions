@@ -1,0 +1,19 @@
+class Solution {
+    public List<List<Integer>> permute(int[] nums) {
+        List<List<Integer>> perms = Arrays.asList(new ArrayList<>());
+
+        for (int n : nums) {
+            List<List<Integer>> new_perms = new ArrayList<>();
+            for (List<Integer> p : perms) {
+                for (int i = 0; i < p.size() + 1; i++) {
+                    List<Integer> p_copy = new ArrayList<>(p);
+                    p_copy.add(i, n);
+                    new_perms.add(p_copy);
+                }
+            }
+            perms = new_perms;
+        }
+
+        return perms;
+    }
+}
