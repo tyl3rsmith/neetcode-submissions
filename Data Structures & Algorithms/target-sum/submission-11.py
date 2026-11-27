@@ -1,0 +1,17 @@
+class Solution:
+    def findTargetSumWays(self, nums: List[int], target: int) -> int:
+        n = len(nums)
+        dp = [defaultdict(int) for _ in range(n + 1)]
+        dp[0][0] = 1 # (0 elements, 0 sum) -> 1 way to do this
+
+        dp = defaultdict(int)
+        dp[0] = 1
+
+        for i in range(1, n + 1):
+            nextDP = defaultdict(int)
+            for total, count in dp.items():
+                nextDP[total + nums[i - 1]] += count
+                nextDP[total - nums[i - 1]] += count
+
+            dp = nextDP
+        return dp[target]
